@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import {
-  AreaChart,
+  ComposedChart,
   Area,
   XAxis,
   YAxis,
@@ -21,13 +21,15 @@ export function ProbabilityConePreview() {
 
     // Last 14 days of historical data for preview
     const historical = mockPredictions.slice(-14);
-    historical.forEach((p) => {
+    historical.forEach((p, index, arr) => {
+      const isLast = index === arr.length - 1;
+      const startVal = isLast ? p.actual_close : null;
       data.push({
         date: format(new Date(p.date), 'MMM d'),
         actual: p.actual_close,
-        p10: null,
-        p50: null,
-        p90: null,
+        p10: startVal,
+        p50: startVal,
+        p90: startVal,
       });
     });
 
@@ -51,7 +53,7 @@ export function ProbabilityConePreview() {
   return (
     <div className="h-[280px] w-full p-4">
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+        <ComposedChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="coneGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3} />
@@ -105,6 +107,7 @@ export function ProbabilityConePreview() {
             strokeWidth={1}
             strokeDasharray="4 4"
             dot={false}
+            connectNulls
           />
           {/* Lower bound line */}
           <Line
@@ -114,6 +117,7 @@ export function ProbabilityConePreview() {
             strokeWidth={1}
             strokeDasharray="4 4"
             dot={false}
+            connectNulls
           />
           {/* Median line */}
           <Line
@@ -122,6 +126,7 @@ export function ProbabilityConePreview() {
             stroke="hsl(var(--accent))"
             strokeWidth={2}
             dot={false}
+            connectNulls
           />
           {/* Actual price line */}
           <Line
@@ -130,8 +135,9 @@ export function ProbabilityConePreview() {
             stroke="hsl(var(--primary))"
             strokeWidth={2}
             dot={false}
+            connectNulls
           />
-        </AreaChart>
+        </ComposedChart>
       </ResponsiveContainer>
     </div>
   );

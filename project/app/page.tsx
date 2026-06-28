@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, TrendingUp, Brain, BarChart3, Zap, Shield, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProbabilityConePreview } from '@/components/landing/probability-cone-preview';
@@ -50,11 +51,8 @@ export default function Home() {
       <header className="relative z-10 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <span className="font-bold text-sm text-background">B</span>
-              </div>
-              <span className="font-semibold text-lg tracking-tight">Agent-B</span>
+            <div className="flex items-center gap-3 h-full">
+              <Image src="/logo.png" alt="Agent-B Logo" width={170} height={42} className="object-contain my-auto" />
             </div>
             <Button asChild variant="outline" className="border-border/50 hover:bg-muted">
               <Link href="/dashboard">
@@ -180,11 +178,9 @@ export default function Home() {
       <footer className="relative z-10 border-t border-border/50 mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <div className="w-6 h-6 rounded bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <span className="font-bold text-xs text-background">B</span>
-              </div>
-              <span>Agent-B v7.0</span>
+            <div className="flex items-center gap-4 text-sm text-muted-foreground h-full">
+              <Image src="/logo.png" alt="Agent-B Logo" width={130} height={32} className="object-contain grayscale opacity-70 my-auto" />
+              <span className="my-auto leading-none">v7.0</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Zero-cost procurement intelligence for Reliance Industries

@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
 export const predictionSchema = z.object({
-  id: z.number(),
+  id: z.union([z.string(), z.number()]),
   date: z.string(),
   actual_close: z.number().nullable(),
   dxy_value: z.number().nullable(),
-  holiday_flag: z.boolean().nullable(),
+  holiday_flag: z.union([z.boolean(), z.number()]).nullable().transform(v => v === null ? null : Boolean(v)),
   fingpt_sentiment: z.number().nullable(),
   pred_1d_10th: z.number().nullable(),
   pred_1d_50th: z.number().nullable(),
@@ -17,7 +17,7 @@ export const predictionSchema = z.object({
   pred_3m_50th: z.number().nullable(),
   pred_3m_90th: z.number().nullable(),
   pred_volatility: z.number().nullable(),
-  pred_ma_crossover: z.boolean().nullable(),
+  pred_ma_crossover: z.union([z.boolean(), z.number()]).nullable().transform(v => v === null ? null : Boolean(v)),
 });
 
 export type Prediction = z.infer<typeof predictionSchema>;

@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import {
-  AreaChart,
+  ComposedChart,
   Area,
   XAxis,
   YAxis,
@@ -39,15 +39,20 @@ export function ProbabilityChart({ predictions, horizon }: ProbabilityChartProps
     const forecastDays = horizon === '1d' ? 3 : horizon === '1m' ? 14 : 30;
 
     // Historical data (last 30 days)
-    const historicalData = sorted.slice(-30).map((p) => ({
-      date: p.date,
-      dateLabel: format(parseISO(p.date), 'MMM d'),
-      actual_close: p.actual_close,
-      pred_10th: null,
-      pred_50th: null,
-      pred_90th: null,
-      type: 'historical',
-    }));
+    const historicalData = sorted.slice(-30).map((p, index, arr) => {
+      const isLast = index === arr.length - 1;
+      // Start the forecast cone from the last historical actual price so the lines connect visually
+      const startVal = isLast ? p.actual_close : null;
+      return {
+        date: p.date,
+        dateLabel: format(parseISO(p.date), 'MMM d'),
+        actual_close: p.actual_close,
+        pred_10th: startVal,
+        pred_50th: startVal,
+        pred_90th: startVal,
+        type: 'historical',
+      };
+    });
 
     // Forecast data
     const forecastData = [];
@@ -55,7 +60,7 @@ export function ProbabilityChart({ predictions, horizon }: ProbabilityChartProps
     const p50 = lastPrediction[`${prefix}_50th` as keyof Prediction] as number | null;
     const p90 = lastPrediction[`${prefix}_90th` as keyof Prediction] as number | null;
 
-    for (let i = 1; i <= Math.min(forecastDays, 7); i++) {
+    for (let i = 1; i <= forecastDays; i++) {
       const forecastDate = addDays(lastDate, i);
       forecastData.push({
         date: format(forecastDate, 'yyyy-MM-dd'),
@@ -117,7 +122,7 @@ export function ProbabilityChart({ predictions, horizon }: ProbabilityChartProps
 
       <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+          <ComposedChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
             <defs>
               <linearGradient id="coneGradientChart" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.25} />
@@ -172,7 +177,7 @@ export function ProbabilityChart({ predictions, horizon }: ProbabilityChartProps
             {/* Probability cone area */}
             <Area
               type="monotone"
-              dataKey="p90"
+              dataKey="pred_90th"
               stroke="none"
               fill="url(#coneGradientChart)"
               fillOpacity={1}
@@ -181,7 +186,7 @@ export function ProbabilityChart({ predictions, horizon }: ProbabilityChartProps
             {/* Upper bound line */}
             <Line
               type="monotone"
-              dataKey="p90"
+              dataKey="pred_90th"
               stroke="hsl(var(--primary) / 0.6)"
               strokeWidth={1}
               strokeDasharray="3 3"
@@ -196,6 +201,7 @@ export function ProbabilityChart({ predictions, horizon }: ProbabilityChartProps
               strokeWidth={2}
               strokeDasharray="5 5"
               dot={false}
+              connectNulls
             />
 
             {/* Lower bound line */}
@@ -206,6 +212,7 @@ export function ProbabilityChart({ predictions, horizon }: ProbabilityChartProps
               strokeWidth={1}
               strokeDasharray="3 3"
               dot={false}
+              connectNulls
             />
 
             {/* Actual price line */}
@@ -215,8 +222,9 @@ export function ProbabilityChart({ predictions, horizon }: ProbabilityChartProps
               stroke="hsl(var(--primary))"
               strokeWidth={2}
               dot={false}
+              connectNulls
             />
-          </AreaChart>
+          </ComposedChart>
         </ResponsiveContainer>
       </div>
     </motion.div>

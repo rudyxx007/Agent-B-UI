@@ -33,7 +33,13 @@ export async function fetchPredictions(): Promise<{
 
     // Validate with Zod
     const validatedData = data
-      .map((row) => predictionSchema.safeParse(row))
+      .map((row) => {
+        const result = predictionSchema.safeParse(row);
+        if (!result.success) {
+          console.error('Validation error for row:', row.id, result.error.format());
+        }
+        return result;
+      })
       .filter((result): result is { success: true; data: Prediction } => result.success)
       .map((result) => result.data);
 

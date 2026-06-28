@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -118,11 +119,9 @@ function DashboardHeader() {
           </Link>
         </Button>
         <div className="h-6 w-px bg-border" />
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <span className="font-bold text-sm text-background">B</span>
-          </div>
-          <span className="font-semibold text-lg">Procurement Console</span>
+        <div className="flex items-center gap-4">
+          <Image src="/logo.png" alt="Agent-B Logo" width={170} height={42} className="object-contain my-auto" />
+          <span className="font-semibold text-lg text-muted-foreground my-auto leading-none">| Procurement Console</span>
         </div>
       </div>
       <Badge variant="outline" className="border-emerald-500/30 bg-emerald-500/10 text-emerald-400">

@@ -441,7 +441,7 @@ export const mockPredictions: Prediction[] = [
   {
     id: 123,
     date: '2026-06-28',
-    actual_close: null,
+    actual_close: 85.12,
     dxy_value: 101.42,
     holiday_flag: false,
     fingpt_sentiment: -0.22,
