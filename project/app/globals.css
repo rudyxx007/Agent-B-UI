@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Agent-B Institutional Dark Theme */
+    --background: 215 20% 6%;
+    --foreground: 210 20% 98%;
+    --card: 215 25% 8%;
+    --card-foreground: 210 20% 98%;
+    --popover: 215 25% 10%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 100% 60%;
+    --primary-foreground: 215 20% 6%;
+    --secondary: 215 20% 12%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 15% 15%;
+    --muted-foreground: 215 10% 65%;
+    --accent: 45 95% 55%;
+    --accent-foreground: 215 20% 6%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 15% 18%;
+    --input: 215 15% 18%;
+    --ring: 210 100% 60%;
+    --radius: 0.5rem;
+
+    /* Chart colors for Agent-B */
+    --chart-1: 210 100% 60%;
+    --chart-2: 45 95% 55%;
+    --chart-3: 152 70% 50%;
+    --chart-4: 350 80% 60%;
+    --chart-5: 215 60% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-glow-primary {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
+  .text-glow-accent {
+    text-shadow: 0 0 20px hsl(var(--accent) / 0.5);
+  }
+
+  .grid-background {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .gradient-mask-fade {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+                linear-gradient(135deg, hsl(var(--primary) / 0.5), hsl(var(--accent) / 0.3)) border-box;
+    border: 1px solid transparent;
+  }
+}
+
+/* Recharts custom styles */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: hsl(var(--border) / 0.5);
+}
+
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}

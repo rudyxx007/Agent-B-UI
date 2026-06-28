@@ -1,0 +1,13 @@
+﻿.env
+.env.*
+!.env.example
+node_modules
+.next
+.vercel
+out
+dist
+*.log
+project-bolt.zip
+PROMPT.txt
+SYSTEM INITIALIZATION PROMPT PROJECT AGENT-B.md
+GLM_COMBINED_CONTEXT.md
