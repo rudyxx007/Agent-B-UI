@@ -42,10 +42,14 @@ const features = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background overflow-hidden">
-      {/* Animated Grid Background */}
-      <div className="fixed inset-0 grid-background opacity-40" />
-      <div className="fixed inset-0 bg-gradient-to-b from-transparent via-background/80 to-background" />
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute top-0 -left-4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
+      <div className="absolute top-0 -right-4 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
+      <div className="absolute -bottom-8 left-20 w-72 h-72 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
+
+      {/* Background grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
       {/* Header */}
       <header className="relative z-10 border-b border-border/50">
