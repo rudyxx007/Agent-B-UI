@@ -64,3 +64,20 @@ npm install
 npm run dev
 ```
 Open `http://localhost:3000` in your browser.
+
+---
+
+## 🔮 Future Roadmap & Technical Refinements (Phase 4)
+
+This UI is a living project that continues to evolve to meet the high-stakes demands of enterprise commodity procurement. The roadmap is divided into algorithmic refinements (resolving visualization debts) and advanced enterprise capabilities.
+
+### 🛠️ Algorithmic Refinements & Fixes
+- **Probability Cone Interpolation (UI Math Upgrade):** Currently, the multi-horizon probability cone projects in a linear fan from the 1-Day to the 1-Month and 3-Month horizons. To mathematically represent expanding uncertainty over time more accurately (and resolve current linear-rendering artifacts), a frontend interpolation algorithm (such as Bezier Curves or polynomial interpolation) will be implemented to smooth the transition and create a true logarithmic expanding "cone".
+
+### 📈 Enterprise Procurement Capabilities
+- **Model Accuracy & Variance Tracking:** The addition of a "Ghost Line" (overlaying yesterday's prediction onto today's actual price) and a collapsible KPI Ledger. This will visually expose Mean Absolute Error (MAE) and build executive trust by tracking historical prediction variance against reality.
+- **"What-If" Scenario Simulator:** An interactive sandbox allowing procurement officers to override AI inputs (e.g., simulating a sudden drop in FinGPT sentiment) to watch the system dynamically recalculate the Probability Cone in real-time.
+- **Procurement Action Recommender:** Translating mathematical models into business action by adding a dynamic widget that recommends precise purchasing strategies (e.g., *"Execute 60% of monthly quota today. The spot price has breached the 10th percentile support line."*).
+- **The "AI Reasoning" Deep-Dive Page:** A dedicated route (`/sentiment`) that pairs raw news articles scraped by ScrapeGraphAI with the LLM's explicit "Thought Chain", proving exactly *why* a specific geopolitical event generated a specific sentiment tensor.
+- **Hedging & Futures Contract Overlay:** A feature allowing users to input their active futures contracts/strike prices. The dashboard will overlay these fixed prices against the AI's Probability Cone to instantly visualize if current corporate hedges are 'in the money' or at risk.
+- **Historical Backtester & ROI Ledger:** A simulation module that calculates the exact dollar amount the company would have saved over the trailing 12 months had they strictly followed the AI's asymmetrical buying recommendations compared to standard Dollar Cost Averaging.
