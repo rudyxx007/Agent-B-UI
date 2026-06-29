@@ -1,151 +1,66 @@
-# Agent-B: Brent Crude Procurement Intelligence
+<div align="center">
+  <h1>🚀 Agent-B: Procurement Console UI</h1>
+  <p><em>The Next-Gen Visual Command Center for Autonomous Multi-Agent Procurement</em></p>
 
-A zero-cost Reliance procurement forecasting system for Brent crude futures using iTransformer quantile predictions and AI-powered sentiment analysis.
+  [![Next.js](https://img.shields.io/badge/Next.js-13.5+-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+  [![React](https://img.shields.io/badge/React-18.0+-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.0+-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+  [![Supabase](https://img.shields.io/badge/Supabase-Live_Sync-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+  [![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+</div>
 
-## Overview
+<br/>
 
-Agent-B is an AI-powered procurement forecasting platform designed for Reliance Industries. It leverages:
+> **Live Deployment:** [**agent-b-dashboard.vercel.app**](https://agent-b-dashboard.vercel.app/)
+> 
+> *Note: This repository contains the **Frontend React Dashboard** of Agent-B. To see the highly sophisticated Multi-Agent AI architecture and Deep Learning predictive models powering this UI, please visit the [**Agent-B-Core-Engine Repository**](https://github.com/rudyxx007/Agent-B-Core-Engine).*
 
-- **iTransformer v7.0**: State-of-the-art quantile forecasting model trained on 90-day Brent price histories
-- **CrewAI**: Multi-agent news analysis for sentiment scoring
-- **FinGPT**: Real-time sentiment analysis from global energy news
-- **Modal**: Serverless inference pipeline
-- **Supabase**: Real-time prediction storage and retrieval
+---
 
-## Features
+## ⚡ Executive Summary (Why This UI Stands Out)
 
-- 10th, 50th, and 90th percentile forecasts across 1-day, 1-month, and 3-month horizons
-- Strategic procurement recommendations (ACCELERATE/DELAY/STAGGER)
-- Real-time FinGPT sentiment scoring (-1 to +1 scale)
-- Interactive probability cone visualization
-- Diagnostics grid showing model inputs and signals
-- Derived execution trace terminal
+Recruiters and Engineering Managers: This is not a standard, static template. This is a highly polished, interactive, production-ready dashboard designed specifically to visualize complex mathematical AI outputs into actionable business intelligence. 
 
-## Tech Stack
+It is built to demonstrate front-end mastery in translating raw data (tensors, quantiles, sentiment scores) into a seamless, high-performance UI experience.
 
-- **Framework**: Next.js 13.5 (App Router)
-- **Styling**: Tailwind CSS with custom dark institutional theme
-- **UI Components**: shadcn/ui
-- **Animations**: motion/react (framer-motion)
-- **Charts**: Recharts
-- **Database**: Supabase
-- **Validation**: Zod
+### 🎨 Premium Aesthetics & UX Design
+Built with a custom dark-mode design system tailored for enterprise data. Features dynamic micro-animations, an **Animated Aurora mesh-gradient background**, and glassmorphism elements to provide a sleek, "Command Center" feel. It proves an understanding of modern frontend UI/UX standards beyond just writing functional code.
 
-## Prerequisites
+### 📊 Advanced Data Visualization (`Recharts`)
+Visualizing future uncertainty is incredibly complex. Instead of drawing a simple line, the dashboard uses custom-configured `<ComposedChart>` components from Recharts to dynamically generate a **Probability Cone**. It intelligently anchors live historical data to multi-horizon future predictions (10th, 50th, and 90th percentiles), mapping raw machine-learning confidence intervals into a visually intuitive layout.
 
-- Node.js 18+
-- npm or yarn
-- Supabase account with `agent_b_predictions` table
+### 🔄 Real-Time Database Integration (`Supabase`)
+The UI is not mocking data. It connects directly to a live PostgreSQL database hosted on Supabase. As the autonomous Python backend agents push new market predictions and sentiment analysis to the cloud every day, this Next.js frontend instantly syncs and re-renders the predictive graphs without manual intervention.
 
-## Environment Variables
+### 📱 Responsive & Mobile-First (`Tailwind CSS`)
+Despite housing complex data grids, KPI cards, and heavy SVG charting, the entire application is 100% responsive. Using Tailwind CSS, the complex multi-column layouts gracefully collapse into mobile-friendly views, ensuring the intelligence is accessible anywhere.
 
-Create a `.env.local` file in the root directory:
+---
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-```
+## 🛠️ Architecture & Core Components
 
-## Database Schema
+- **`app/page.tsx`**: The stunning landing page designed for immediate visual impact. Features an animated background, grid-lighting effects, and a live preview of the probability cone to instantly communicate the product's value.
+- **`app/dashboard/`**: The core application route housing the Procurement Console. Includes dynamic KPI cards monitoring Brent Crude pricing, FinGPT market sentiment, and volatility metrics.
+- **`components/dashboard/probability-chart.tsx`**: A highly custom Recharts component dealing with complex date interpolation, null-value connections, and custom SVG `<linearGradient>` definitions to beautifully render the AI's predictive horizons.
+- **`components/dashboard/diagnostics-grid.tsx`**: A responsive status grid that reads directly from the Supabase backend to confirm that the `FinGPT` sentiment analyzers and `iTransformer` forecasting pipelines have successfully run for the day.
 
-The `agent_b_predictions` table should have the following columns:
+## 🚀 Running Locally
 
-| Column | Type | Description |
-|--------|------|-------------|
-| id | integer | Primary key |
-| date | date | Prediction date |
-| actual_close | numeric | Actual Brent close price |
-| dxy_value | numeric | Dollar Index value |
-| holiday_flag | boolean | Market holiday indicator |
-| fingpt_sentiment | numeric | FinGPT sentiment score (-1 to +1) |
-| pred_1d_10th | numeric | 1-day 10th percentile |
-| pred_1d_50th | numeric | 1-day 50th percentile (median) |
-| pred_1d_90th | numeric | 1-day 90th percentile |
-| pred_1m_10th | numeric | 1-month 10th percentile |
-| pred_1m_50th | numeric | 1-month 50th percentile |
-| pred_1m_90th | numeric | 1-month 90th percentile |
-| pred_3m_10th | numeric | 3-month 10th percentile |
-| pred_3m_50th | numeric | 3-month 50th percentile |
-| pred_3m_90th | numeric | 3-month 90th percentile |
-| pred_volatility | numeric | Predicted volatility spread |
-| pred_ma_crossover | boolean | MA crossover signal |
-
-## Local Development
+Want to run the UI locally on your machine?
 
 ```bash
-# Install dependencies
+# 1. Clone the repository
+git clone https://github.com/rudyxx007/Agent-B-UI.git
+
+# 2. Install Dependencies
 npm install
 
-# Run development server
+# 3. Create a .env.local file in the root directory and add your Supabase keys
+# NEXT_PUBLIC_SUPABASE_URL=your_url
+# NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+
+# 4. Start the development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Run linting
-npm run lint
-
-# Type check
-npm run typecheck
 ```
-
-The app will be available at `http://localhost:3000`.
-
-## Routes
-
-- `/` - Landing page with probability cone preview
-- `/dashboard` - Institutional procurement console
-
-## Vercel Deployment
-
-1. Push your code to a Git repository (GitHub, GitLab, or Bitbucket)
-
-2. Import the project in Vercel:
-   - Go to [vercel.com](https://vercel.com)
-   - Click "New Project"
-   - Import your repository
-
-3. Configure environment variables:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-
-4. Deploy!
-
-## Project Structure
-
-```
-/
-├── app/
-│   ├── layout.tsx           # Root layout with theme
-│   ├── page.tsx             # Landing page
-│   ├── globals.css          # Global styles and theme
-│   └── dashboard/
-│       └── page.tsx         # Procurement console
-├── components/
-│   ├── ui/                  # shadcn/ui components
-│   ├── landing/
-│   │   └── probability-cone-preview.tsx
-│   └── dashboard/
-│       ├── strategic-banner.tsx
-│       ├── horizon-selector.tsx
-│       ├── kpi-cards.tsx
-│       ├── probability-chart.tsx
-│       ├── diagnostics-grid.tsx
-│       └── logistics-terminal.tsx
-├── lib/
-│   ├── supabase/
-│   │   └── client.ts        # Supabase browser client
-│   └── agent-b/
-│       ├── types.ts         # Zod schemas and types
-│       ├── analytics.ts     # Helper functions
-│       ├── data.ts          # Data fetching layer
-│       └── mock-data.ts     # Demo data fallback
-├── hooks/
-│   ├── use-toast.ts         # Toast notifications
-│   └── use-prediction-data.ts
-└── README.md
-```
-
-## License
-
-Proprietary - Reliance Industries
+Open `http://localhost:3000` in your browser.
